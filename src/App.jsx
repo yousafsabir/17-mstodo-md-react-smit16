@@ -1,45 +1,32 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import menu from "./assets/menu.svg";
+import settings from "./assets/settings.svg";
+import question from "./assets/question.svg";
+import notification from "./assets/notifications.svg";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="todoApp">
+      <nav className="navbar">
+        <div className="navLeft">
+          <img src={menu} className="navIcon navMenu" />
+          <h1 className="appName">To Do</h1>
+        </div>
+        <div className="navMiddle">
+          <input type="search" className="navSearch" />
+        </div>
+        <div className="navRight">
+          <img src={settings} className="navIcon navSettings" />
+          <img src={question} className="navIcon navQuestion" />
+          <img src={notification} className="navIcon navNotification" />
+          <div className="userProfile">
+            <p>MS</p>
+          </div>
+        </div>
+      </nav>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
