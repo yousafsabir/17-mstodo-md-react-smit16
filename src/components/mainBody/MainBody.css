@@ -1,0 +1,52 @@
+.mainBody {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: "sidebar main main main main main";
+}
+
+#sidebar {
+  grid-area: sidebar;
+}
+
+#main {
+  grid-area: mainBody;
+}
+
+/*            ============== Side Bar ================
+ */
+.sidebar {
+  background-color: var(--clr-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.sidebarDivs:last-of-type {
+  flex-grow: 1;
+}
+
+.sidebarDivs {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.sidebarDivs:first-of-type {
+  padding: 1.5rem 0.75rem;
+}
+
+.sidebarIcons {
+  width: 20px;
+  stroke: var(--clr-sidebar-icons) !important;
+}
+
+p {
+  color: var(--clr-black);
+  font-size: 0.875rem;
+}
+.bold {
+  font-weight: 600;
+}
+
+/*               ============ Main ============= 
+ */
