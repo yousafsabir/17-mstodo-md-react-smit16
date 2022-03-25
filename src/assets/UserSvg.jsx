@@ -8,7 +8,7 @@ function UserSvg(props) {
       fill="none"
       viewBox="0 0 24 24"
       stroke={props.stroke}
-      stroke-width="2"
+      stroke-width="1"
       width={props.width}
     >
       <path
