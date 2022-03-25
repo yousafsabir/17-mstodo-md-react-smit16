@@ -38,7 +38,48 @@ export default function MainBody() {
         </div>
         <div className="sidebarDivs"></div>
       </section>
-      <section className="main" id="main"></section>
+      <section className="main" id="main">
+        <div className="mainHeading">
+          <div className="headingUpper">
+            <p className="heading">My Day</p>
+            <p className="headingDots">...</p>
+          </div>
+          <p className="headingDate">Friday, March 25</p>
+        </div>
+        <div className="inputForm">
+          <div className="radio"></div>
+          <input type="text" className="formInput" />
+          <button className="formButton">Add</button>
+        </div>
+        <div className="output">
+          <table className="pending">
+            <tr>
+              <td>
+                <div className="radio"></div>
+              </td>
+              <td>This is the work</td>
+            </tr>
+          </table>
+          <p
+            style={{
+              fontSize: "1.125rem",
+              color: "var(--clr-black)",
+              marginLeft: "10px",
+              marginBottom: "6px",
+            }}
+          >
+            Completed
+          </p>
+          <table className="completed">
+            <tr>
+              <td>
+                <div className="radio"></div>
+              </td>
+              <td>work completed</td>
+            </tr>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }
