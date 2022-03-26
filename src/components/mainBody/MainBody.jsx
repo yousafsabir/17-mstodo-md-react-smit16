@@ -1,14 +1,21 @@
 import React from "react";
+import { useState } from "react";
 import MenuSidebarSvg from "../../assets/MenuSidbarSvg.jsx";
 import SunSvg from "../../assets/SunSvg.jsx";
 import StarSvg from "../../assets/StarSvg.jsx";
 import CalendarSvg from "../../assets/CalendarSvg.jsx";
 import UserSvg from "../../assets/UserSvg.jsx";
 import HomeSvg from "../../assets/HomeSvg.jsx";
+import CircleSvg from "../../assets/CircleSvg.jsx";
+import CircleTickSvg from "../../assets/CircleTickSvg.jsx";
 import "./MainBody.css";
 export default function MainBody() {
   const sidebarIconColor = "#797775";
   const sidebarIconWidth = 20;
+
+  const [task, setTask] = useState("");
+  const [taskArray, setTaskArray] = useState([]);
+  const [completedArray, setCompletedArray] = useState([]);
 
   return (
     <div className="mainBody">
@@ -47,18 +54,53 @@ export default function MainBody() {
           <p className="headingDate">Friday, March 25</p>
         </div>
         <div className="inputForm">
-          <div className="radio"></div>
-          <input type="text" className="formInput" />
-          <button className="formButton">Add</button>
+          {/* <div className="3radio"></div> */}
+          <CircleSvg />
+          <input
+            type="text"
+            value={task}
+            className="formInput"
+            onChange={(e) => {
+              setTask(e.target.value);
+            }}
+          />
+          <button
+            className="formButton"
+            onClick={() => {
+              setTaskArray([...taskArray, task]);
+              setTask("");
+            }}
+          >
+            Add
+          </button>
         </div>
         <div className="output">
           <table className="pending">
-            <tr>
-              <td>
-                <div className="radio"></div>
-              </td>
-              <td>This is the work</td>
-            </tr>
+            <thead>
+              <tr>
+                <td>Task</td>
+              </tr>
+            </thead>
+            <tbody>
+              {taskArray.map((data, index) => {
+                return (
+                  <tr
+                    className="circleHover"
+                    onClick={() => {
+                      let completeArray = taskArray.splice(index, 1);
+                      console.log(completeArray);
+                      setTaskArray([...taskArray]);
+                      setCompletedArray([...completedArray, completeArray]);
+                    }}
+                  >
+                    <td>
+                      <CircleSvg />
+                    </td>
+                    <td>{data}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
           <p
             style={{
@@ -71,12 +113,18 @@ export default function MainBody() {
             Completed
           </p>
           <table className="completed">
-            <tr>
-              <td>
-                <div className="radio"></div>
-              </td>
-              <td>work completed</td>
-            </tr>
+            <tbody>
+              {completedArray.map((data, index) => {
+                return (
+                  <tr>
+                    <td>
+                      <CircleTickSvg />
+                    </td>
+                    <td className="linedTask">{data}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
       </section>
