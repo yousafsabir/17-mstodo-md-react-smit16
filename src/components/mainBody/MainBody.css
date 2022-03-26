@@ -103,16 +103,6 @@ p {
   gap: 8px;
 }
 
-.radio {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid var(--clr-grey);
-}
-.radio:hover {
-  cursor: pointer;
-}
-
 .formInput {
   box-sizing: border-box;
   width: 100%;
@@ -147,11 +137,14 @@ table {
   border-collapse: collapse;
   margin-bottom: 10px;
 }
-tr {
-  border-bottom: 1px solid #d0d0d7;
-}
 td {
   padding: 8px 8px 8px 0;
+}
+.circleHover:hover {
+  cursor: pointer;
+}
+.linedTask {
+  text-decoration: line-through;
 }
 /* pending */
 /* completed */
