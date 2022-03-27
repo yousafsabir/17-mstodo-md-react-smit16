@@ -8,7 +8,7 @@ import UserSvg from "../../assets/UserSvg.jsx";
 import HomeSvg from "../../assets/HomeSvg.jsx";
 import CircleSvg from "../../assets/CircleSvg.jsx";
 import CircleTickSvg from "../../assets/CircleTickSvg.jsx";
-import moment from 'moment';
+import moment from "moment";
 import PencilSvg from "../../assets/PencilSvg.jsx";
 import BinSvg from "../../assets/BinSvg.jsx";
 import "./MainBody.css";
@@ -24,11 +24,22 @@ export default function MainBody() {
   const [indexedit, setIndexedit] = useState();
   const [buttonValue, setButtonValue] = useState("Add");
   const current = new Date();
-  const day = current.getDay();
-  const today = moment().format('dddd');
-  const month= moment().format('MMMM');
-  const date = `${current.getDate()}th, ${month}, ${current.getFullYear()}`;
-  let dataAddition =(e) => {
+  const todaysDate = current.getDate();
+  const today = moment().format("dddd");
+  const month = moment().format("MMMM");
+  let nthGenerator = "";
+  if (todaysDate == 1) {
+    nthGenerator = "st";
+  } else if (todaysDate == 2) {
+    nthGenerator = "nd";
+  } else if (todaysDate == 3) {
+    nthGenerator = "rd";
+  } else {
+    nthGenerator = "th";
+  }
+
+  const date = `${todaysDate}${nthGenerator}, ${month}, ${current.getFullYear()}`;
+  let dataAddition = (e) => {
     if (buttonValue === "Add") {
       setTaskArray([...taskArray, task]);
       setTask("");
@@ -39,7 +50,7 @@ export default function MainBody() {
       setTask("");
       setButtonValue("Add");
     }
-  }
+  };
   return (
     <div className="mainBody">
       <section className="sidebar" id="sidebar">
