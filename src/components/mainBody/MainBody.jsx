@@ -9,6 +9,8 @@ import HomeSvg from "../../assets/HomeSvg.jsx";
 import CircleSvg from "../../assets/CircleSvg.jsx";
 import CircleTickSvg from "../../assets/CircleTickSvg.jsx";
 import "./MainBody.css";
+import Delete from "../../assets/Delete.jsx";
+import Edit from "../../assets/Edit.jsx";
 export default function MainBody() {
   const sidebarIconColor = "#797775";
   const sidebarIconWidth = 20;
@@ -16,7 +18,8 @@ export default function MainBody() {
   const [task, setTask] = useState("");
   const [taskArray, setTaskArray] = useState([]);
   const [completedArray, setCompletedArray] = useState([]);
-
+  const [updateSwitch, setUpdateSwitch] = useState(false);
+  const [indexedit, setIndexedit] = useState();
   return (
     <div className="mainBody">
       <section className="sidebar" id="sidebar">
@@ -66,12 +69,22 @@ export default function MainBody() {
           />
           <button
             className="formButton"
-            onClick={() => {
+            value={updateSwitch ? "Update" : "Add"}
+            onClick={(e) => {
+              if (e.target.value === "Add") {
               setTaskArray([...taskArray, task]);
               setTask("");
+              }
+              else if (e.target.value === "Update") {
+                let temp = taskArray;
+                temp[indexedit] = task;
+                setTaskArray(temp);
+                setTask("");
+                setUpdateSwitch(false);
+              }
             }}
           >
-            Add
+            {updateSwitch ? "Update" : "Add"}
           </button>
         </div>
         <div className="output">
@@ -86,17 +99,39 @@ export default function MainBody() {
                 return (
                   <tr
                     className="circleHover"
-                    onClick={() => {
+                    
+                  >
+                    <td onClick={() => {
                       let completeArray = taskArray.splice(index, 1);
                       console.log(completeArray);
                       setTaskArray([...taskArray]);
                       setCompletedArray([...completedArray, completeArray]);
-                    }}
-                  >
-                    <td>
+                    }}>
                       <CircleSvg />
                     </td>
-                    <td>{data}</td>
+                    <td style={{
+                      width: "100%",
+                    }} onClick={() => {
+                      let completeArray = taskArray.splice(index, 1);
+                      console.log(completeArray);
+                      setTaskArray([...taskArray]);
+                      setCompletedArray([...completedArray, completeArray]);
+                    }}>{data}</td>
+                    <td onClick={() =>{
+                      setUpdateSwitch(true);
+                      setTask(data);
+                      setIndexedit(index);
+
+                    }}>
+                      <Edit/>
+                    </td>
+                    <td onClick={()=>{
+                        taskArray.splice(index, 1);
+                        setTaskArray([...taskArray]);
+                      }}>
+
+                      <Delete  />
+                    </td>
                   </tr>
                 );
               })}
@@ -108,6 +143,7 @@ export default function MainBody() {
               color: "var(--clr-black)",
               marginLeft: "10px",
               marginBottom: "6px",
+              marginTop: "60px",
             }}
           >
             Completed
@@ -116,7 +152,11 @@ export default function MainBody() {
             <tbody>
               {completedArray.map((data, index) => {
                 return (
-                  <tr>
+                  <tr className="circleHover" onClick={()=>{
+                    let completeArray = completedArray.splice(index, 1);
+                    setCompletedArray([...completedArray]);
+                    setTaskArray([...taskArray, completeArray]);
+                  }}>
                     <td>
                       <CircleTickSvg />
                     </td>
