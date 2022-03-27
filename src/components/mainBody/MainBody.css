@@ -97,7 +97,6 @@ p {
   background-color: var(--clr-sidebar-bg);
   border-radius: 4px;
   border: 1px solid #edebe9;
-  box-shadow: 0 17px 0 -16px #767678;
   display: flex;
   align-items: center;
   gap: 8px;
