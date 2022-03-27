@@ -8,6 +8,7 @@ import UserSvg from "../../assets/UserSvg.jsx";
 import HomeSvg from "../../assets/HomeSvg.jsx";
 import CircleSvg from "../../assets/CircleSvg.jsx";
 import CircleTickSvg from "../../assets/CircleTickSvg.jsx";
+import moment from 'moment';
 import PencilSvg from "../../assets/PencilSvg.jsx";
 import BinSvg from "../../assets/BinSvg.jsx";
 import "./MainBody.css";
@@ -21,6 +22,12 @@ export default function MainBody() {
   const [completedArray, setCompletedArray] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
   const [indexedit, setIndexedit] = useState();
+  const current = new Date();
+  const day = current.getDay();
+  const today = moment().format('dddd');
+  const month= moment().format('MMMM');
+  const date = `${current.getDate()}th, ${month}, ${current.getFullYear()}`;
+
   return (
     <div className="mainBody">
       <section className="sidebar" id="sidebar">
@@ -55,7 +62,9 @@ export default function MainBody() {
             <p className="heading">My Day</p>
             <p className="headingDots">...</p>
           </div>
-          <p className="headingDate">Friday, March 25</p>
+          <p className="headingDate">
+            {today} {date}
+          </p>
         </div>
         <div className="inputForm">
           {/* <div className="3radio"></div> */}
