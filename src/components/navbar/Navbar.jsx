@@ -20,7 +20,7 @@ export default function Navbar() {
         <img src={question} className="navIcon navQuestion" />
         <img src={notification} className="navIcon navNotification" />
         <div className="userProfile">
-          <p>YS</p>
+          <p>NT</p>
         </div>
       </div>
     </nav>
