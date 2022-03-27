@@ -22,12 +22,24 @@ export default function MainBody() {
   const [completedArray, setCompletedArray] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
   const [indexedit, setIndexedit] = useState();
+  const [buttonValue, setButtonValue] = useState("Add");
   const current = new Date();
   const day = current.getDay();
   const today = moment().format('dddd');
   const month= moment().format('MMMM');
   const date = `${current.getDate()}th, ${month}, ${current.getFullYear()}`;
-
+  let dataAddition =(e) => {
+    if (buttonValue === "Add") {
+      setTaskArray([...taskArray, task]);
+      setTask("");
+    } else if (buttonValue === "Update") {
+      let temp = taskArray;
+      temp[indexedit] = task;
+      setTaskArray(temp);
+      setTask("");
+      setButtonValue("Add");
+    }
+  }
   return (
     <div className="mainBody">
       <section className="sidebar" id="sidebar">
@@ -72,6 +84,11 @@ export default function MainBody() {
           <input
             type="text"
             value={task}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                dataAddition(e);
+              }
+            }}
             className="formInput"
             onChange={(e) => {
               setTask(e.target.value);
@@ -79,21 +96,10 @@ export default function MainBody() {
           />
           <button
             className="formButton"
-            value={updateSwitch ? "Update" : "Add"}
-            onClick={(e) => {
-              if (e.target.value === "Add") {
-                setTaskArray([...taskArray, task]);
-                setTask("");
-              } else if (e.target.value === "Update") {
-                let temp = taskArray;
-                temp[indexedit] = task;
-                setTaskArray(temp);
-                setTask("");
-                setUpdateSwitch(false);
-              }
-            }}
+            value={buttonValue}
+            onClick={dataAddition}
           >
-            {updateSwitch ? "Update" : "Add"}
+            {buttonValue}
           </button>
         </div>
         <div className="output">
@@ -132,7 +138,7 @@ export default function MainBody() {
                     </td>
                     <td
                       onClick={() => {
-                        setUpdateSwitch(true);
+                        setButtonValue("Update");
                         setTask(data);
                         setIndexedit(index);
                       }}
