@@ -6,6 +6,15 @@
   grid-template-areas: "sidebar main main main main main";
 }
 
+@media (max-width: 500px) {
+  #sidebar {
+    display: none;
+  }
+  .mainBody {
+    grid-template-areas: "main main main main main main";
+  }
+}
+
 #sidebar {
   grid-area: sidebar;
 }
@@ -69,6 +78,16 @@ p {
 .headingUpper {
   display: flex;
   margin-bottom: 8px;
+}
+
+.headingMenu {
+  display: none;
+}
+@media (max-width: 500px) {
+  .headingMenu {
+    display: block;
+    margin-right: 5px;
+  }
 }
 
 .heading {

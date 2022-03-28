@@ -82,6 +82,21 @@ export default function MainBody() {
       <section className="main" id="main">
         <div className="mainHeading">
           <div className="headingUpper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="headingMenu"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke={sidebarIconColor}
+              strokeWidth="1"
+              width={sidebarIconWidth}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
             <p className="heading">My Day</p>
             <p className="headingDots">...</p>
           </div>
