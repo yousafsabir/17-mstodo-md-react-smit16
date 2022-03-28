@@ -47,7 +47,28 @@ input#search {
   background-position: 4px center;
   text-indent: 25px;
 }
-
+/* Media Querries */
+@media (max-width: 800px) {
+  .navSearch {
+    width: 16rem;
+  }
+}
+@media (max-width: 600px) {
+  .navIcon {
+    margin: 0.6rem;
+  }
+  .appName {
+    margin: 0.6rem 0.6rem 0.4rem 0.6rem;
+  }
+  .navSearch {
+    width: 12rem;
+  }
+}
+@media (max-width: 430px) {
+  .navSearch {
+    width: 2.5rem;
+  }
+}
 /* right side */
 .navRight {
   display: flex;
