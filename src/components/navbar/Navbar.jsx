@@ -14,7 +14,7 @@ export default function Navbar() {
         <h1 className="appName">To Do</h1>
       </div>
       <div className="navMiddle">
-        <input type="search" className="navSearch" id="navSearch" />
+        <input type="search" className="navSearch" id="search" />
       </div>
       <div className="navRight">
         <img src={settings} className="navIcon navSettings" />
