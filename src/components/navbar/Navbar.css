@@ -41,6 +41,10 @@
   border: none;
   border-radius: 2px;
 }
+#navSearch {
+  background-image: url(../../assets/Search.svg);
+  background-repeat: none;
+}
 
 /* right side */
 .navRight {

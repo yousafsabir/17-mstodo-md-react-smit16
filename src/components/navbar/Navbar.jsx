@@ -3,6 +3,7 @@ import menu from "../../assets/menu.svg";
 import settings from "../../assets/settings.svg";
 import question from "../../assets/question.svg";
 import notification from "../../assets/notifications.svg";
+
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -13,7 +14,7 @@ export default function Navbar() {
         <h1 className="appName">To Do</h1>
       </div>
       <div className="navMiddle">
-        <input type="search" className="navSearch" />
+        <input type="search" className="navSearch" id="navSearch" />
       </div>
       <div className="navRight">
         <img src={settings} className="navIcon navSettings" />
