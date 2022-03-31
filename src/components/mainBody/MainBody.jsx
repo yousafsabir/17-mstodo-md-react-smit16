@@ -12,7 +12,20 @@ import moment from "moment";
 import PencilSvg from "../../assets/PencilSvg.jsx";
 import BinSvg from "../../assets/BinSvg.jsx";
 import "./MainBody.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { actionCreators } from "../../state/index.js";
+
+
+
+
+
 export default function MainBody() {
+  const dispatch = useDispatch();
+  const action=bindActionCreators(actionCreators,dispatch);
+  const storeTask = useSelector (state => state.todo);
   const sidebarIconColor = "#797775";
   const sidebarIconWidth = 20;
   const pendingTaskActionColor = "#0078d7";
@@ -41,12 +54,14 @@ export default function MainBody() {
   const date = `${todaysDate}${nthGenerator}, ${month}, ${current.getFullYear()}`;
   let dataAddition = (e) => {
     if (buttonValue === "Add") {
-      setTaskArray([...taskArray, task]);
+      action.addTask(task);
+      // setTaskArray([...taskArray, task]);
       setTask("");
     } else if (buttonValue === "Update") {
       let temp = taskArray;
       temp[indexedit] = task;
-      setTaskArray(temp);
+      action.updateTask(temp);
+      // setTaskArray(temp);
       setTask("");
       setButtonValue("Add");
     }
@@ -136,7 +151,7 @@ export default function MainBody() {
               </tr>
             </thead>
             <tbody>
-              {taskArray.map((data, index) => {
+              {storeTask.map((data, index) => {
                 return (
                   <tr className="circleHover">
                     <td
