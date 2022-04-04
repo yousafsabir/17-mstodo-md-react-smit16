@@ -26,9 +26,6 @@ export default function MainBody() {
   const pendingTaskActionColor = "#0078d7";
 
   const [task, setTask] = useState("");
-  const [taskArray, setTaskArray] = useState([]);
-  const [completedArray, setCompletedArray] = useState([]);
-  const [updateSwitch, setUpdateSwitch] = useState(false);
   const [indexedit, setIndexedit] = useState();
   const [buttonValue, setButtonValue] = useState("Add");
   const current = new Date();
