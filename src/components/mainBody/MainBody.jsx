@@ -12,15 +12,20 @@ import moment from "moment";
 import PencilSvg from "../../assets/PencilSvg.jsx";
 import BinSvg from "../../assets/BinSvg.jsx";
 import "./MainBody.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from '../../state/index'
+
+
+
+
 export default function MainBody() {
   const sidebarIconColor = "#797775";
   const sidebarIconWidth = 20;
   const pendingTaskActionColor = "#0078d7";
 
   const [task, setTask] = useState("");
-  const [taskArray, setTaskArray] = useState([]);
-  const [completedArray, setCompletedArray] = useState([]);
-  const [updateSwitch, setUpdateSwitch] = useState(false);
   const [indexedit, setIndexedit] = useState();
   const [buttonValue, setButtonValue] = useState("Add");
   const current = new Date();
@@ -37,18 +42,30 @@ export default function MainBody() {
   } else {
     nthGenerator = "th";
   }
+  const todoState = useSelector ((state) => state.todos);
+  const actions = bindActionCreators(actionCreators, useDispatch());
 
   const date = `${todaysDate}${nthGenerator}, ${month}, ${current.getFullYear()}`;
   let dataAddition = (e) => {
     if (buttonValue === "Add") {
-      setTaskArray([...taskArray, task]);
+      if (task !== "") {
+      actions.addTodo(task);
       setTask("");
+      
+    } else {
+      alert("Please enter a task");
+    }
     } else if (buttonValue === "Update") {
-      let temp = taskArray;
-      temp[indexedit] = task;
-      setTaskArray(temp);
+      if (task !== "") {
+
+      actions.updateTodo(task, indexedit);
       setTask("");
       setButtonValue("Add");
+      } else {
+        alert("Please enter a task");
+      }
+      
+
     }
   };
   return (
@@ -136,15 +153,14 @@ export default function MainBody() {
               </tr>
             </thead>
             <tbody>
-              {taskArray.map((data, index) => {
+              {todoState.map((data, index) => {
+                if (data.completed===false){
                 return (
                   <tr className="circleHover">
                     <td
                       onClick={() => {
-                        let completeArray = taskArray.splice(index, 1);
-                        console.log(completeArray);
-                        setTaskArray([...taskArray]);
-                        setCompletedArray([...completedArray, completeArray]);
+                        console.log(data)
+                        actions.toggleTodo(index);
                       }}
                     >
                       <CircleSvg />
@@ -154,18 +170,15 @@ export default function MainBody() {
                         width: "100%",
                       }}
                       onClick={() => {
-                        let completeArray = taskArray.splice(index, 1);
-                        console.log(completeArray);
-                        setTaskArray([...taskArray]);
-                        setCompletedArray([...completedArray, completeArray]);
+                        actions.toggleTodo(index);
                       }}
                     >
-                      {data}
+                      {data.task}
                     </td>
                     <td
                       onClick={() => {
                         setButtonValue("Update");
-                        setTask(data);
+                        setTask(data.task);
                         setIndexedit(index);
                       }}
                     >
@@ -176,8 +189,7 @@ export default function MainBody() {
                     </td>
                     <td
                       onClick={() => {
-                        taskArray.splice(index, 1);
-                        setTaskArray([...taskArray]);
+                        actions.deleteTodo(index);
                       }}
                     >
                       <BinSvg
@@ -187,7 +199,7 @@ export default function MainBody() {
                     </td>
                   </tr>
                 );
-              })}
+              }})}
             </tbody>
           </table>
           <p
@@ -203,22 +215,22 @@ export default function MainBody() {
           </p>
           <table className="completed">
             <tbody>
-              {completedArray.map((data, index) => {
+              {todoState.map((data, index) => {
+                if (data.completed===true){
                 return (
                   <tr
                     className="circleHover"
                     onClick={() => {
-                      let completeArray = completedArray.splice(index, 1);
-                      setCompletedArray([...completedArray]);
-                      setTaskArray([...taskArray, completeArray]);
+                      actions.toggleTodo(index);
                     }}
                   >
                     <td>
                       <CircleTickSvg />
                     </td>
-                    <td className="linedTask">{data}</td>
+                    <td className="linedTask">{data.task}</td>
                   </tr>
                 );
+                  }
               })}
             </tbody>
           </table>
